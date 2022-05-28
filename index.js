@@ -66,6 +66,11 @@ async function run() {
             const result = await profileCollection.insertOne(userProfile);
             res.send(result);
         });
+
+        app.get("/profile", async (req, res) => {
+            const profile = await profileCollection.find().toArray();
+            res.send(profile);
+        });
     }
     finally {
 
