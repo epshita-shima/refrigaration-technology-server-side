@@ -15,6 +15,7 @@ async function run() {
     try {
         await client.connect();
         const productsCollection = client.db('refrigaration-technology').collection('products');
+        const bookingCollection = client.db('refrigaration-technology').collection('booking');
 
         app.get('/products', async (req, res) => {
             const query = {};
@@ -29,6 +30,14 @@ async function run() {
             const product = await productsCollection.findOne(query);
             res.send(product);
         })
+
+        //creat booking collection api
+        app.post('/booking', async (req, res) => {
+            const booking = req.body;
+            const result = await bookingCollection.insertOne(booking);
+            res.send(result);
+        });
+
     }
     finally {
 
