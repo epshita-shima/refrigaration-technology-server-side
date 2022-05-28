@@ -17,6 +17,7 @@ async function run() {
         const productsCollection = client.db('refrigaration-technology').collection('products');
         const bookingCollection = client.db('refrigaration-technology').collection('booking');
         const reviewCollection = client.db('refrigaration-technology').collection('review');
+        const profileCollection = client.db('refrigaration-technology').collection('profile');
 
         app.get('/products', async (req, res) => {
             const query = {};
@@ -57,6 +58,13 @@ async function run() {
         app.get("/review", async (req, res) => {
             const review = await reviewCollection.find().toArray();
             res.send(review);
+        });
+
+        //user profile
+        app.post('/profile', async (req, res) => {
+            const userProfile = req.body;
+            const result = await profileCollection.insertOne(userProfile);
+            res.send(result);
         });
     }
     finally {
