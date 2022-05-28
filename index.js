@@ -37,6 +37,13 @@ async function run() {
             const result = await bookingCollection.insertOne(booking);
             res.send(result);
         });
+        //for oder 
+        app.get('/booking', async (req, res) => {
+            const customer = req.query.customer;
+            const query = { customer: customer };
+            const bookings = await bookingCollection.find(query).toArray();
+            res.send(bookings);
+        })
 
     }
     finally {
