@@ -18,14 +18,12 @@ async function run() {
         const bookingCollection = client.db('refrigaration-technology').collection('booking');
         const reviewCollection = client.db('refrigaration-technology').collection('review');
         const profileCollection = client.db('refrigaration-technology').collection('profile');
-
         app.get('/products', async (req, res) => {
             const query = {};
             const cursor = productsCollection.find(query);
             const products = await cursor.toArray();
             res.send(products);
         });
-
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
@@ -77,6 +75,7 @@ async function run() {
     }
 }
 run().catch(console.dir);
+
 
 app.get('/', (req, res) => {
     res.send('Hello From regrigaration technology!')
